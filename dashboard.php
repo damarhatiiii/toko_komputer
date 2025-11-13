@@ -44,9 +44,7 @@ if (!isset($_SESSION['username'])) {
                 
             </section>
         </main>
-
-    </div>
             <!-- Footer -->
-    <?php include 'includes/footbar.php'; ?>
+            <?php include 'includes\footbar.php'; ?>
 </body>
 </html>
