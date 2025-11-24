@@ -1,9 +1,9 @@
 <?php
 session_start();
-include '../config/db.php';
+include '../../config/db.php';
 
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -33,7 +33,7 @@ mysqli_stmt_close($stmt);
 if (!$t) {
     $back = isset($_GET['back']) ? $_GET['back'] : 'transaksi';
     if ($back == 'aktifitas') {
-        header("Location: aktifitas.php?tab=transaksi");
+        header('Location: ' . BASE_PATH . '/pages/aktifitas.php?tab=transaksi');
     } else {
         header("Location: transaksi.php");
     }
@@ -61,16 +61,16 @@ $detail = mysqli_stmt_get_result($stmt2);
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900">
-    <?php include '../includes/navbar.php'; ?>
+    <?php include '../../includes/navbar.php'; ?>
     
-    <div class="p-6">
+    <div class="p-6 pb-20">
         <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold">Detail Transaksi #<?= $id_transaksi; ?></h2>
                 <?php 
-                $back_url = isset($_GET['back']) && $_GET['back'] == 'aktifitas' 
-                    ? 'aktifitas.php?tab=transaksi' 
-                    : 'transaksi.php';
+                $back_url = (isset($_GET['back']) && $_GET['back'] == 'aktifitas')
+                    ? BASE_PATH . '/pages/aktifitas.php?tab=transaksi'
+                    : BASE_PATH . '/pages/transaksi/transaksi.php';
                 ?>
                 <a href="<?= $back_url; ?>" class="text-blue-600 hover:underline">← Kembali</a>
             </div>
@@ -139,7 +139,7 @@ $detail = mysqli_stmt_get_result($stmt2);
 
     <?php 
     mysqli_stmt_close($stmt2);
-    include '../includes/footbar.php'; 
+    include '../../includes/footbar.php'; 
     ?>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <?php 
 session_start();
-include '../config/db.php';
+include '../../config/db.php';
 
 // Pastikan user login dulu
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -30,9 +30,9 @@ if (!$result) {
     </head>
 <body class="bg-gray-100 dark:bg-gray-900">
     <!-- Navbar -->
-    <?php include '../includes/navbar.php'; ?>
+    <?php include '../../includes/navbar.php'; ?>
 
-    <div class="p-6 min-h-[calc(100vh-80px)]">
+    <div class="p-6 min-h-[calc(100vh-80px)] pb-20">
         <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md overflow-hidden">
             <h2 class="text-2xl font-bold bg-gray-800 dark:bg-gray-700 text-white px-5 py-4">
                 Data Produk
@@ -74,7 +74,7 @@ if (!$result) {
                             <td class="px-4 py-3 text-center">
 
                                 <!-- Update Stok -->
-                                <a href="update_stok.php?id=<?= $row['id_produk']; ?>"
+                                <a href="../barang/update_stok.php?id=<?= $row['id_produk']; ?>"
                                 class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs">
                                 Update Stok
                                 </a>
@@ -96,6 +96,6 @@ if (!$result) {
     </div>
 
     <!-- Footer -->
-    <?php include '../includes/footbar.php'; ?>
+    <?php include '../../includes/footbar.php'; ?>
 </body>
 </html>

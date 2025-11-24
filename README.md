@@ -160,30 +160,34 @@ toko_komputer/
 │   └── footbar.php
 ├── pages/
 │   ├── dashboard.php
-│   ├── produk.php
-│   ├── tambah.php
-│   ├── update_stok.php
-│   ├── update_stok_proses.php
-│   ├── hapus_produk.php
-│   ├── karyawan.php
-│   ├── tambah_karyawan.php
-│   ├── tambah_karyawan_proses.php
-│   ├── hapus_karyawan.php
-│   ├── customer.php
-│   ├── tambah_customer_proses.php
-│   ├── supplier.php
-│   ├── tambah_supplier_proses.php
 │   ├── aktifitas.php (halaman utama aktivitas)
-│   ├── transaksi.php (tidak digunakan di navbar, diakses via aktifitas)
-│   ├── tambah_transaksi.php
-│   ├── tambah_transaksi_proses.php
-│   ├── detail_transaksi.php
-│   ├── barang_masuk.php (tidak digunakan di navbar, diakses via aktifitas)
-│   ├── tambah_barang_masuk.php
-│   ├── tambah_barang_masuk_proses.php
-│   ├── barang_keluar.php (tidak digunakan di navbar, diakses via aktifitas)
-│   ├── tambah_barang_keluar.php
-│   └── tambah_barang_keluar_proses.php
+│   ├── master/
+│   │   ├── produk.php
+│   │   ├── tambah.php
+│   │   ├── hapus_produk.php
+│   │   ├── karyawan.php
+│   │   ├── tambah_karyawan.php
+│   │   ├── tambah_karyawan_proses.php
+│   │   ├── hapus_karyawan.php
+│   │   ├── customer.php
+│   │   ├── tambah_customer_proses.php
+│   │   ├── supplier.php
+│   │   ├── tambah_supplier_proses.php
+│   ├── barang/
+│   │   ├── barang_masuk.php
+│   │   ├── tambah_barang_masuk.php
+│   │   ├── tambah_barang_masuk_proses.php
+│   │   ├── barang_keluar.php
+│   │   ├── tambah_barang_keluar.php
+│   │   ├── tambah_barang_keluar_proses.php
+│   │   ├── update_stok.php
+│   │   └── update_stok_proses.php
+│   └── transaksi/
+│       ├── transaksi.php (diakses via aktifitas)
+│       ├── tambah_transaksi.php
+│       ├── tambah_transaksi_proses.php
+│       ├── detail_transaksi.php
+│       └── cetak_struk.php
 ├── index.php
 ├── tailwind.config.js
 ├── package.json

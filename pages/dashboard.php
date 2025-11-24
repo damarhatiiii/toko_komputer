@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    header("Location: ../auth/login.php");
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -99,7 +99,7 @@ $low_stock = mysqli_fetch_assoc($low_stock_query)['count'];
 
     <?php include '../includes/navbar.php'; ?>
 
-    <main class="p-6 min-h-[calc(100vh-80px)]">
+    <main class="p-6 min-h-[calc(100vh-80px)] pb-20">
         <div class="max-w-7xl mx-auto">
             <!-- Header -->
             <div class="mb-6">

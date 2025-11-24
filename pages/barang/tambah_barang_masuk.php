@@ -1,9 +1,9 @@
 <?php
 session_start();
-include '../config/db.php';
+include '../../config/db.php';
 
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -27,7 +27,7 @@ if (!$supplier_result) {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900">
-    <?php include '../includes/navbar.php'; ?>
+    <?php include '../../includes/navbar.php'; ?>
     
     <div class="p-6">
         <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-6">
@@ -83,7 +83,7 @@ if (!$supplier_result) {
                     <button type="submit" class="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800">
                         Simpan
                     </button>
-                    <a href="aktifitas.php?tab=barang_masuk" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
+                    <a href="../aktifitas.php?tab=barang_masuk" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
                         Batal
                     </a>
                 </div>

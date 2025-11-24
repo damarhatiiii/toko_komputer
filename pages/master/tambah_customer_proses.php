@@ -1,10 +1,10 @@
 <?php
 session_start();
-include '../config/db.php';
-include '../config/helper.php';
+include '../../config/db.php';
+include '../../config/helper.php';
 
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 

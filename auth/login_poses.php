@@ -84,7 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['role']     = $data['role'];
         $_SESSION['id_karyawan'] = $data['id_karyawan'];
 
-        header("Location: ../pages/dashboard.php");
+        $destination = BASE_PATH . '/pages/dashboard.php';
+        header("Location: " . ($destination === '' ? '/' : $destination));
         exit;
     } else {
         // Password salah

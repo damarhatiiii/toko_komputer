@@ -1,16 +1,15 @@
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-        
 <?php
 // Deteksi halaman aktif berdasarkan nama file
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
     <nav class="bg-white border-gray-200 dark:bg-gray-900 shadow">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="../pages/dashboard.php" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="../assets/sssda.png" class="h-8" alt="NinetyNine Logo" />
+        <a href="<?= BASE_PATH; ?>/pages/dashboard.php" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="<?= BASE_PATH; ?>/assets/sssda.png" class="h-8" alt="NinetyNine Logo" />
         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             NinetyNineComp
         </span>
@@ -37,7 +36,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
             <!-- Dashboard -->
             <li>
-            <a href="../pages/dashboard.php"
+            <a href="<?= BASE_PATH; ?>/pages/dashboard.php"
                 class="block py-2 px-3 rounded-sm md:p-0 
                 <?= $current_page == 'dashboard.php'
                     ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-blue-500'
@@ -48,7 +47,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
             <!-- Produk -->
             <li>
-            <a href="../pages/produk.php"
+            <a href="<?= BASE_PATH; ?>/pages/master/produk.php"
                 class="block py-2 px-3 rounded-sm md:p-0 
                 <?= $current_page == 'produk.php'
                     ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-blue-500'
@@ -59,7 +58,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
             <!-- Aktifitas -->
             <li>
-            <a href="../pages/aktifitas.php"
+            <a href="<?= BASE_PATH; ?>/pages/aktifitas.php"
                 class="block py-2 px-3 rounded-sm md:p-0 
                 <?= in_array($current_page, ['aktifitas.php', 'transaksi.php', 'barang_masuk.php', 'barang_keluar.php', 'tambah_transaksi.php', 'tambah_barang_masuk.php', 'tambah_barang_keluar.php', 'detail_transaksi.php'])
                     ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-blue-500'
@@ -70,7 +69,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
             <!-- Tambah -->
             <li>
-            <a href="../pages/tambah.php"
+            <a href="<?= BASE_PATH; ?>/pages/master/tambah.php"
                 class="block py-2 px-3 rounded-sm md:p-0 
                 <?= $current_page == 'tambah.php'
                     ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-blue-500'
@@ -81,7 +80,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
             <!-- Akun -->
             <li>
-            <a href="../pages/karyawan.php"
+            <a href="<?= BASE_PATH; ?>/pages/master/karyawan.php"
                 class="block py-2 px-3 rounded-sm md:p-0 
                 <?= $current_page == 'karyawan.php'
                     ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-blue-500'

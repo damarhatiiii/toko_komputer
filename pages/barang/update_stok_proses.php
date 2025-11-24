@@ -1,10 +1,10 @@
 <?php
 session_start();
-include '../config/db.php';
+include '../../config/db.php';
 
 // Pastikan user login dulu
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -16,7 +16,7 @@ $update = mysqli_query($conn,
 );
 
 if ($update) {
-    header("Location: produk.php?msg=stok_updated");
+    header('Location: ' . BASE_PATH . '/pages/master/produk.php?msg=stok_updated');
 } else {
     echo "Gagal update stok: " . mysqli_error($conn);
 }

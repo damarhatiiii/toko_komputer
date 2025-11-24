@@ -1,10 +1,10 @@
 <?php
 session_start();
-include '../config/db.php';
+include '../../config/db.php';
 
 // Pastikan user login dulu
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -25,7 +25,7 @@ $data = mysqli_fetch_assoc($q);
 
 <body class="bg-gray-900 text-white">
     <!-- Navbar -->
-    <?php include '../includes/navbar.php'; ?>
+    <?php include '../../includes/navbar.php'; ?>
     <div class="max-w-md mx-auto mt-24 mb-32">
         <div class="bg-gray-800 rounded-lg shadow-md">
 
@@ -60,7 +60,7 @@ $data = mysqli_fetch_assoc($q);
     </div>
 
     <!-- Footer -->
-    <?php include '../includes/footbar.php'; ?>
+    <?php include '../../includes/footbar.php'; ?>
 
 </body>
 </html>

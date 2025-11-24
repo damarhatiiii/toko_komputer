@@ -1,10 +1,16 @@
 <?php
 session_start();
-include '../config/db.php';
+include '../../config/db.php';
 
 // Cek login
 if (!isset($_SESSION['username'])) {
-    header("Location: ../auth/login.php");
+    header('Location: ' . BASE_PATH . '/auth/login.php');
+    exit;
+}
+
+// Cek apakah user adalah admin
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header('Location: ' . BASE_PATH . '/pages/master/karyawan.php?error=akses_ditolak');
     exit;
 }
 ?>
@@ -19,10 +25,27 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body class="bg-gray-900 text-white">
 
-<?php include '../includes/navbar.php'; ?>
+<?php include '../../includes/navbar.php'; ?>
 
-<div class="max-w-md mx-auto mt-20 bg-gray-800 p-6 rounded-lg shadow-lg">
+<div class="max-w-md mx-auto mt-20 mb-20 bg-gray-800 p-6 rounded-lg shadow-lg">
     <h2 class="text-xl font-bold mb-4">Tambah Karyawan</h2>
+
+    <?php if (isset($_GET['error'])): ?>
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            <?php
+            $error = $_GET['error'];
+            if ($error == 'field_kosong') {
+                echo "Semua field harus diisi!";
+            } elseif ($error == 'username_ada') {
+                echo "Username sudah digunakan! Silakan gunakan username lain.";
+            } elseif ($error == 'query_gagal') {
+                echo "Gagal menyimpan data. " . (isset($_GET['detail']) ? htmlspecialchars($_GET['detail']) : '');
+            } else {
+                echo "Terjadi kesalahan!";
+            }
+            ?>
+        </div>
+    <?php endif; ?>
 
     <form action="tambah_karyawan_proses.php" method="POST">
         <label class="block mb-2">Nama</label>
@@ -49,7 +72,7 @@ if (!isset($_SESSION['username'])) {
     </form>
 </div>
 
-<?php include '../includes/footbar.php'; ?>
+<?php include '../../includes/footbar.php'; ?>
 
 </body>
 </html>

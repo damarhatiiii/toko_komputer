@@ -3,7 +3,7 @@ session_start();
 include '../config/db.php';
 
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -68,15 +68,15 @@ $active_tab = $_GET['tab'] ?? 'transaksi';
                 <div class="flex items-center justify-between border-b pb-3 mb-6">
                     <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Aktifitas</h2>
                     <div class="flex gap-2">
-                        <a href="tambah_transaksi.php" 
+                        <a href="transaksi/tambah_transaksi.php" 
                             class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-medium px-4 py-2 rounded-lg text-sm">
                             + Transaksi
                         </a>
-                        <a href="tambah_barang_masuk.php" 
+                        <a href="barang/tambah_barang_masuk.php" 
                             class="inline-block bg-green-700 hover:bg-green-800 text-white font-medium px-4 py-2 rounded-lg text-sm">
                             + Barang Masuk
                         </a>
-                        <a href="tambah_barang_keluar.php" 
+                        <a href="barang/tambah_barang_keluar.php" 
                             class="inline-block bg-orange-700 hover:bg-orange-800 text-white font-medium px-4 py-2 rounded-lg text-sm">
                             + Barang Keluar
                         </a>
@@ -151,7 +151,7 @@ $active_tab = $_GET['tab'] ?? 'transaksi';
                                     Rp <?= number_format($row['total'], 0, ',', '.'); ?>
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <a href="detail_transaksi.php?id=<?= $row['id_transaksi']; ?>&back=aktifitas" 
+                                    <a href="transaksi/detail_transaksi.php?id=<?= $row['id_transaksi']; ?>&back=aktifitas" 
                                         class="text-blue-600 hover:underline">Detail</a>
                                 </td>
                             </tr>
@@ -257,7 +257,7 @@ $active_tab = $_GET['tab'] ?? 'transaksi';
                                 <th class="px-6 py-3">No</th>
                                 <th class="px-6 py-3">Tanggal</th>
                                 <th class="px-6 py-3">Karyawan</th>
-                                <th class="px-6 py-3">Jenis</th>
+                                <th class="px-6 py-3 min-w-[140px]">Jenis</th>
                                 <th class="px-6 py-3">Keterangan</th>
                             </tr>
                         </thead>
@@ -285,7 +285,7 @@ $active_tab = $_GET['tab'] ?? 'transaksi';
                                 <td class="px-6 py-4"><?= date('d/m/Y H:i', strtotime($row['tanggal'])); ?></td>
                                 <td class="px-6 py-4 font-medium"><?= htmlspecialchars($row['nama_karyawan']); ?></td>
                                 <td class="px-6 py-4">
-                                    <span class="px-2 py-1 rounded text-xs font-semibold <?= $badge_color; ?>">
+                                    <span class="inline-block px-3 py-1.5 rounded-md text-xs font-semibold whitespace-nowrap <?= $badge_color; ?>">
                                         <?= ucfirst(str_replace('_', ' ', $row['jenis_aktifitas'])); ?>
                                     </span>
                                 </td>

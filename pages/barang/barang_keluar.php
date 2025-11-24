@@ -1,9 +1,9 @@
 <?php
 session_start();
-include '../config/db.php';
+include '../../config/db.php';
 
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -23,9 +23,9 @@ $result = mysqli_query($conn, "SELECT bk.*, p.nama_produk, k.nama as nama_karyaw
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <?php include '../includes/navbar.php'; ?>
+    <?php include '../../includes/navbar.php'; ?>
     
-    <div class="p-6 bg-gray-100 dark:bg-gray-900 min-h-screen">
+    <div class="p-6 bg-gray-100 dark:bg-gray-900 min-h-screen pb-20">
         <div class="max-w-7xl mx-auto">
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
                 <div class="flex items-center justify-between border-b pb-3 mb-6">
@@ -67,7 +67,7 @@ $result = mysqli_query($conn, "SELECT bk.*, p.nama_produk, k.nama as nama_karyaw
         </div>
     </div>
 
-    <?php include '../includes/footbar.php'; ?>
+    <?php include '../../includes/footbar.php'; ?>
 </body>
 </html>
 

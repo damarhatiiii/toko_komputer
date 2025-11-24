@@ -1,10 +1,10 @@
 <?php
 session_start();
-include '../config/db.php';
-include '../config/helper.php';
+include '../../config/db.php';
+include '../../config/helper.php';
 
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -50,7 +50,7 @@ if (mysqli_stmt_execute($stmt)) {
     mysqli_stmt_close($stmt2);
     
     mysqli_stmt_close($stmt);
-    header("Location: aktifitas.php?tab=barang_keluar&success=1");
+    header('Location: ' . BASE_PATH . '/pages/aktifitas.php?tab=barang_keluar&success=1');
 } else {
     header("Location: tambah_barang_keluar.php?error=1");
 }

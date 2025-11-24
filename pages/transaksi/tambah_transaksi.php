@@ -1,9 +1,9 @@
 <?php
 session_start();
-include '../config/db.php';
+include '../../config/db.php';
 
 if (!isset($_SESSION['username'])) {
-    header('Location: ../auth/login.php');
+    header('Location: ' . BASE_PATH . '/auth/login.php');
     exit;
 }
 
@@ -20,9 +20,9 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900">
-    <?php include '../includes/navbar.php'; ?>
+    <?php include '../../includes/navbar.php'; ?>
     
-    <div class="p-6 min-h-[calc(100vh-80px)]">
+    <div class="p-6 min-h-[calc(100vh-80px)] pb-20">
         <div class="max-w-5xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Transaksi Baru</h2>
             
@@ -103,7 +103,7 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
                     <button type="submit" class="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800">
                         Simpan Transaksi
                     </button>
-                    <a href="aktifitas.php?tab=transaksi" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
+                    <a href="../aktifitas.php?tab=transaksi" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
                         Batal
                     </a>
                 </div>
