@@ -160,9 +160,9 @@ $nama_pembeli = !empty($t['nama_pembeli']) ? $t['nama_pembeli'] : 'Umum';
 </head>
 <body>
     <div class="header">
-        <h1>TOKO KOMPUTER</h1>
-        <p>Jl. Contoh No. 123</p>
-        <p>Telp: 081234567890</p>
+        <h1>NINETYNINECOMP</h1>
+        <p>Jl. jalan kemana mana</p>
+        <p>Telp: 088kapankapankedupan</p>
     </div>
 
     <div class="info">

@@ -7,11 +7,13 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-// Ambil data transaksi
+// Ambil data transaksi dengan join customer
 $result = mysqli_query($conn, "SELECT t.*, k.nama as nama_karyawan,
-                                COALESCE(t.nama_pembeli, 'Umum') as nama_pembeli_display
+                                COALESCE(c.nama, t.nama_pembeli, 'Umum') as nama_pembeli_display,
+                                c.id_customer, c.nama as nama_customer
                                 FROM transaksi t 
                                 JOIN karyawan k ON t.id_karyawan = k.id_karyawan
+                                LEFT JOIN customer c ON t.id_customer = c.id_customer
                                 ORDER BY t.tanggal DESC");
 ?>
 <!DOCTYPE html>
@@ -58,7 +60,21 @@ $result = mysqli_query($conn, "SELECT t.*, k.nama as nama_karyawan,
                                 <td class="px-6 py-4"><?= $no++; ?></td>
                                 <td class="px-6 py-4 font-medium"><?= htmlspecialchars($row['id_transaksi']); ?></td>
                                 <td class="px-6 py-4"><?= date('d/m/Y', strtotime($row['tanggal'])); ?></td>
-                                <td class="px-6 py-4"><?= htmlspecialchars($row['nama_pembeli_display'] ?? 'Umum'); ?></td>
+                                <td class="px-6 py-4">
+                                    <?php if (!empty($row['id_customer'])): ?>
+                                        <span class="text-blue-600 dark:text-blue-400 font-medium">
+                                            <?= htmlspecialchars($row['id_customer']); ?>
+                                        </span>
+                                        <br>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">
+                                            <?= htmlspecialchars($row['nama_pembeli_display'] ?? 'Umum'); ?>
+                                        </span>
+                                    <?php else: ?>
+                                        <span class="text-gray-600 dark:text-gray-400">
+                                            <?= htmlspecialchars($row['nama_pembeli_display'] ?? 'Umum'); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </td>
                                 <td class="px-6 py-4"><?= htmlspecialchars($row['nama_karyawan']); ?></td>
                                 <td class="px-6 py-4 font-semibold text-green-600">
                                     Rp <?= number_format($row['total'], 0, ',', '.'); ?>

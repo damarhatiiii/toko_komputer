@@ -19,12 +19,12 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
     <title>Tambah Transaksi</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900">
+<body class="bg-gray-100 dark:bg-gray-900">
     <?php include '../includes/navbar.php'; ?>
     
-    <div class="p-6">
-        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6">
-            <h2 class="text-2xl font-bold mb-6">Transaksi Baru</h2>
+    <div class="p-6 min-h-[calc(100vh-80px)]">
+        <div class="max-w-5xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Transaksi Baru</h2>
             
             <?php if (isset($_GET['error'])): ?>
                 <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
@@ -34,22 +34,38 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
             
             <form method="POST" action="tambah_transaksi_proses.php" id="transaksiForm">
                 <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1">Nama Pembeli *</label>
-                    <input type="text" name="nama_pembeli" id="nama_pembeli" 
-                        class="w-full p-2 border rounded" 
-                        placeholder="Masukkan nama pembeli"
-                        required>
-                    <p class="text-xs text-gray-500 mt-1">Masukkan nama pembeli untuk transaksi ini</p>
+                    <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Pilih Member (Customer)</label>
+                    <select name="id_customer" id="id_customer" 
+                        class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                        onchange="updateNamaPembeli()">
+                        <option value="">-- Pilih Customer / Umum --</option>
+                        <?php 
+                        mysqli_data_seek($customer_result, 0);
+                        while ($c = mysqli_fetch_assoc($customer_result)): 
+                        ?>
+                            <option value="<?= htmlspecialchars($c['id_customer']); ?>" 
+                                data-nama="<?= htmlspecialchars($c['nama']); ?>">
+                                <?= htmlspecialchars($c['id_customer']); ?> - <?= htmlspecialchars($c['nama']); ?>
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                    <p class="text-xs text-gray-500 mt-1">Pilih customer yang terdaftar atau biarkan kosong untuk pembeli umum</p>
                 </div>
 
-                <!-- Hidden field untuk id_customer jika dipilih dari autocomplete -->
-                <input type="hidden" name="id_customer" id="id_customer" value="">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Nama Pembeli *</label>
+                    <input type="text" name="nama_pembeli" id="nama_pembeli" 
+                        class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent" 
+                        placeholder="Masukkan nama pembeli"
+                        required>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Nama pembeli akan terisi otomatis jika memilih customer, atau isi manual untuk pembeli umum</p>
+                </div>
 
                 <div class="mb-4">
-                    <h3 class="text-lg font-semibold mb-3">Pilih Produk</h3>
-                    <div class="border rounded-lg p-4 max-h-60 overflow-y-auto">
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800 dark:text-white">Pilih Produk</h3>
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 max-h-60 overflow-y-auto bg-gray-50 dark:bg-gray-700">
                         <?php while ($p = mysqli_fetch_assoc($produk_result)): ?>
-                            <div class="flex items-center justify-between p-2 border-b">
+                            <div class="flex items-center justify-between p-2 border-b border-gray-200 dark:border-gray-600">
                                 <div class="flex-1">
                                     <input type="checkbox" name="produk[]" value="<?= $p['id_produk']; ?>" 
                                         class="produk-checkbox" 
@@ -57,8 +73,8 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
                                         data-nama="<?= htmlspecialchars($p['nama_produk']); ?>"
                                         data-stok="<?= $p['stok']; ?>"
                                         onchange="toggleProduk(this)">
-                                    <span class="ml-2"><?= htmlspecialchars($p['nama_produk']); ?></span>
-                                    <span class="text-gray-500 text-sm ml-2">
+                                    <span class="ml-2 text-gray-800 dark:text-white"><?= htmlspecialchars($p['nama_produk']); ?></span>
+                                    <span class="text-gray-500 dark:text-gray-400 text-sm ml-2">
                                         (Stok: <?= $p['stok']; ?>) - 
                                         Rp <?= number_format($p['harga'], 0, ',', '.'); ?>
                                     </span>
@@ -66,7 +82,7 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
                                 <input type="number" name="qty[<?= $p['id_produk']; ?>]" 
                                     min="1" max="<?= $p['stok']; ?>" 
                                     value="1" 
-                                    class="hidden qty-input w-20 p-1 border rounded"
+                                    class="hidden qty-input w-20 p-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                     data-produk="<?= $p['id_produk']; ?>"
                                     onchange="updateTotal()">
                             </div>
@@ -76,10 +92,10 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
 
                 <div id="selectedProducts" class="mb-4"></div>
 
-                <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                <div class="mb-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div class="flex justify-between items-center">
-                        <span class="text-lg font-semibold">Total:</span>
-                        <span id="totalHarga" class="text-2xl font-bold text-green-600">Rp 0</span>
+                        <span class="text-lg font-semibold text-gray-800 dark:text-white">Total:</span>
+                        <span id="totalHarga" class="text-2xl font-bold text-green-600 dark:text-green-400">Rp 0</span>
                     </div>
                 </div>
 
@@ -97,36 +113,23 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
 
     <script>
         let selectedProducts = {};
-        let customerList = [];
-        
-        // Load customer list untuk autocomplete
-        <?php 
-        if ($customer_result && mysqli_num_rows($customer_result) > 0) {
-            mysqli_data_seek($customer_result, 0);
-            echo "customerList = [\n";
-            while ($c = mysqli_fetch_assoc($customer_result)) {
-                echo "    {id: '" . htmlspecialchars($c['id_customer'], ENT_QUOTES) . "', nama: '" . htmlspecialchars($c['nama'], ENT_QUOTES) . "'},\n";
-            }
-            echo "];\n";
-        }
-        ?>
 
-        // Autocomplete untuk nama pembeli
-        document.addEventListener('DOMContentLoaded', function() {
+        // Update nama pembeli ketika customer dipilih
+        function updateNamaPembeli() {
+            const customerSelect = document.getElementById('id_customer');
             const namaPembeliInput = document.getElementById('nama_pembeli');
-            const idCustomerInput = document.getElementById('id_customer');
             
-            namaPembeliInput.addEventListener('input', function() {
-                const value = this.value.toLowerCase();
-                // Cek apakah input cocok dengan customer yang ada
-                const matchedCustomer = customerList.find(c => c.nama.toLowerCase() === value);
-                if (matchedCustomer) {
-                    idCustomerInput.value = matchedCustomer.id;
-                } else {
-                    idCustomerInput.value = '';
+            if (customerSelect.value) {
+                const selectedOption = customerSelect.options[customerSelect.selectedIndex];
+                const namaCustomer = selectedOption.getAttribute('data-nama');
+                if (namaCustomer) {
+                    namaPembeliInput.value = namaCustomer;
                 }
-            });
-        });
+            } else {
+                // Jika memilih "Umum", biarkan kosong untuk diisi manual
+                namaPembeliInput.value = '';
+            }
+        }
 
         function toggleProduk(checkbox) {
             const produkId = checkbox.value;
@@ -156,18 +159,18 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
                 return;
             }
 
-            let html = '<h3 class="text-lg font-semibold mb-3">Produk Terpilih:</h3><div class="space-y-2">';
+            let html = '<h3 class="text-lg font-semibold mb-3 text-gray-800 dark:text-white">Produk Terpilih:</h3><div class="space-y-2">';
             for (let id in selectedProducts) {
                 const p = selectedProducts[id];
                 html += `
-                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
-                        <span>${p.nama}</span>
+                    <div class="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded">
+                        <span class="text-gray-800 dark:text-white">${p.nama}</span>
                         <div class="flex items-center gap-2">
                             <input type="number" min="1" max="${p.stok}" value="${p.qty}" 
-                                class="w-20 p-1 border rounded"
+                                class="w-20 p-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                                 onchange="updateQty('${id}', this.value)">
-                            <span>x Rp ${p.harga.toLocaleString('id-ID')}</span>
-                            <span class="font-semibold">= Rp ${(p.harga * p.qty).toLocaleString('id-ID')}</span>
+                            <span class="text-gray-600 dark:text-gray-300">x Rp ${p.harga.toLocaleString('id-ID')}</span>
+                            <span class="font-semibold text-gray-800 dark:text-white">= Rp ${(p.harga * p.qty).toLocaleString('id-ID')}</span>
                         </div>
                     </div>
                 `;
