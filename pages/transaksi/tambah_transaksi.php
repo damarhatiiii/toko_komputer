@@ -203,6 +203,7 @@ $customer_result = mysqli_query($conn, "SELECT * FROM customer ORDER BY nama");
             document.getElementById('totalHarga').textContent = 'Rp ' + total.toLocaleString('id-ID');
         }
     </script>
+    <?php include '../../includes/footbar.php'; ?>
 </body>
 </html>
 

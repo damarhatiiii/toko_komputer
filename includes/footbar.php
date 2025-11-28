@@ -18,7 +18,7 @@
 
     <!-- ⬇ Bagian nama kelompok (di bawah footer utama) -->
     <div class="text-center text-sm text-gray-700 py-4 border-gray-200">
-        <p class="font-semibold text-gray-900">Nama Kelompok</p>
+        <p class="font-semibold text-gray-900">Anggota Kelompok</p>
         <p class="text-gray-600">Muhamad Damar Hati • Ananta Bagas Sasena • Mohammad Ardhian Syarifudin</p>
     </div>
 
