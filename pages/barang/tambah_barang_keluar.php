@@ -18,10 +18,9 @@ $produk_result = mysqli_query($conn, "SELECT * FROM produk WHERE stok > 0 ORDER 
     <title>Tambah Barang Keluar</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 min-h-screen flex flex-col">
     <?php include '../../includes/navbar.php'; ?>
-    
-    <div class="p-6 min-h-[calc(100vh-80px)] pb-20">
+    <div class="p-6 flex-grow">
         <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h2 class="text-2xl font-bold mb-6 text-gray-900">Tambah Barang Keluar</h2>
             
@@ -84,6 +83,7 @@ $produk_result = mysqli_query($conn, "SELECT * FROM produk WHERE stok > 0 ORDER 
             }
         }
     </script>
+    <?php include '../../includes/footbar.php'; ?>
 </body>
 </html>
 
